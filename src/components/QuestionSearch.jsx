@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import axios from 'axios'; 
 
-function QuestionSearch() {
-  // const [questions, setQuestions] = useState();
+function QuestionSearch(  props  ) {
   const [selectedCategory, setSelectedCategory] = useState(); 
   const [difficulty, setDifficulty] = useState(); 
+
 
   let catNums = {
     'general knowledge': 9, 
@@ -31,8 +32,14 @@ function QuestionSearch() {
     1: 'easy', 2: 'medium', 3: 'hard'
   }
 
-  let handleSubmit = (event) => {
+  let handleSubmit = async (event) => {
     event.preventDefault();
+    let url = `http://localhost:4000/api/trivia/${catNums[selectedCategory]}/${difficulty}`
+    let result = await axios.get(url)
+    let questionsArray = result.data.resData.results
+    props.setQuestions(questionsArray)
+
+
     console.log('selected category: ', selectedCategory)
     console.log('difficulty: ', difficulty)
   }
@@ -47,6 +54,7 @@ function QuestionSearch() {
 
   return (
     <div>
+      {console.log('props: ', props)}
       <div>Question Search</div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="category">

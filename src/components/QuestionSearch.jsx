@@ -37,11 +37,19 @@ function QuestionSearch(  props  ) {
     let url = `http://localhost:4000/api/trivia/${catNums[selectedCategory]}/${difficulty}`
     let result = await axios.get(url)
     let questionsArray = result.data.resData.results
-    props.setQuestions(questionsArray)
-
-
-    console.log('selected category: ', selectedCategory)
-    console.log('difficulty: ', difficulty)
+    let finishedSetQuestions = await props.setQuestions(questionsArray)
+    let obj = {}
+    for (let i = 0; i < questionsArray.length; i++){
+      obj[i] = [questionsArray[i]['correct_answer']]
+      // console.log([questionsArray[i]['incorrect_answers']])
+      let currentQ = questionsArray[i]
+      for (let j = 0; j < currentQ['incorrect_answers'].length; j++){
+        // console.log(currentQ['incorrect_answers'][j])
+        obj[i].push(currentQ['incorrect_answers'][j])
+      }
+    }
+    props.setOptions(obj)
+    // console.log(obj)
   }
   
   let handleCatChange = (event) => {
@@ -53,8 +61,11 @@ function QuestionSearch(  props  ) {
   }
 
   return (
+
     <div>
-      {console.log('props: ', props)}
+
+      {console.log('props in questionSearch: ', props)}
+      
       <div>Question Search</div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="category">

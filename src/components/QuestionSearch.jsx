@@ -32,12 +32,31 @@ function QuestionSearch(  props  ) {
     1: 'easy', 2: 'medium', 3: 'hard'
   }
 
+
+  // fisher-yates shuffle algorithm
+  let shuffleOptions = (obj) => {
+        for (let key in obj){
+          let currentOptionsArr = obj[key]
+          for (let i = 0; i < currentOptionsArr.length; i++){
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = currentOptionsArr[i]
+            currentOptionsArr[i] = currentOptionsArr[j]
+            currentOptionsArr[j] = temp 
+      }
+    }
+    return obj
+  }
+
+
+
   let handleSubmit = async (event) => {
     event.preventDefault();
     let url = `http://localhost:4000/api/trivia/${catNums[selectedCategory]}/${difficulty}`
     let result = await axios.get(url)
     let questionsArray = result.data.resData.results
     let finishedSetQuestions = await props.setQuestions(questionsArray)
+
+    // set up options 
     let obj = {}
     for (let i = 0; i < questionsArray.length; i++){
       obj[i] = [questionsArray[i]['correct_answer']]
@@ -48,8 +67,12 @@ function QuestionSearch(  props  ) {
         obj[i].push(currentQ['incorrect_answers'][j])
       }
     }
-    props.setOptions(obj)
-    // console.log(obj)
+
+    console.log('obj: ', obj)
+    let shuffledOptions = shuffleOptions(obj)
+    console.log('shuffledOptions: ', shuffledOptions)
+    props.setOptions(shuffledOptions)
+
   }
   
   let handleCatChange = (event) => {
@@ -64,7 +87,7 @@ function QuestionSearch(  props  ) {
 
     <div>
 
-      {console.log('props in questionSearch: ', props)}
+      {/* {console.log('props in questionSearch: ', props)} */}
       
       <div>Question Search</div>
       <form onSubmit={handleSubmit}>

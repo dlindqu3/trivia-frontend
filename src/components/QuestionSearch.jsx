@@ -117,7 +117,7 @@ function QuestionSearch(  props  ) {
         <br /> 
         <br />
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Start" />
       </form>
     </div>
   );

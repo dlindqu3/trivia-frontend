@@ -1,5 +1,9 @@
+## next steps
+- "start" button onClick: redirect to question page 
+    - maintain queried questions data in state/local storage? 
+    - display first question from query list 
+
 ## later
-- randomize order of possible answer options 
 - buttons to select response 
 - button to submit response 
 - record whether response is correct 

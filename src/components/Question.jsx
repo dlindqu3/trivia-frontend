@@ -6,12 +6,8 @@ function Question( props ) {
   return (
 
     <div>
-
-      {/* {console.log('props in Question: ', props)}
-      {console.log('Question -- props.question[0]: ', props.questions[0])} */}
-     
-      {/* { props.options[0] && shuffleOptions()} */}
-
+      <p>Question component here</p>
+      {console.log('props: ', props)}
       <form>
         <p>{props.questions[0] && props.questions[props.currentNumber]['question']}</p>
         <p>{props.options[props.currentNumber] && props.options[props.currentNumber][0]}</p>

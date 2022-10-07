@@ -4,7 +4,8 @@ import QuestionSearch from '../components/QuestionSearch';
 function SearchPage() {
   return (
     <div>
-      <QuestionSearch /> 
+      <p>search page here</p>
+      {/* <QuestionSearch />  */}
     </div>
   )
 }

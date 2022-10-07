@@ -68,11 +68,9 @@ function QuestionSearch(  props  ) {
       }
     }
 
-    console.log('obj: ', obj)
     let shuffledOptions = shuffleOptions(obj)
-    console.log('shuffledOptions: ', shuffledOptions)
-    props.setOptions(shuffledOptions)
 
+    props.setOptions(shuffledOptions)
   }
   
   let handleCatChange = (event) => {

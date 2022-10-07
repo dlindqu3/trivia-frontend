@@ -1,6 +1,12 @@
 import Question from "./components/Question";
 import QuestionSearch from "./components/QuestionSearch";
 import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+
+import Header from "./components/Header";
+import Login from './pages/Login';
+import Register from './pages/Register';
+import SearchPage from "./pages/SearchPage";
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,17 +19,20 @@ function App() {
 
   const [options, setOptions] = useState({});
 
-  // functions
-  // check if given answer is correct
-  // move to next question in list
+
+  // Auth
+  
 
   return (
     <div className="App">
       <BrowserRouter>
         <div>
+          <Header /> 
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/login" element={<Login />} /> 
+            <Route path="/register" element={<Register />} /> 
+            {/* <Route
               path="/search"
               element={
                 <QuestionSearch
@@ -48,7 +57,7 @@ function App() {
                   setOptions={setOptions}
                 />
               }
-            />
+            /> */}
           </Routes>
         </div>
       </BrowserRouter>
